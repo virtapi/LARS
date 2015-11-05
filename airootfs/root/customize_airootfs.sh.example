@@ -1,0 +1,47 @@
+#!/bin/bash
+
+##
+# modified by bastelfreak
+# based on work from Bluewind and foxxx0
+##
+set -e -u
+
+# english language and german keyboard layout
+sed -i 's/#\(en_US\.UTF-8\)/\1/' /etc/locale.gen
+echo 'KEYMAP=de' > /etc/vconsole.conf
+locale-gen
+
+ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
+
+usermod -s /usr/bin/bash root
+chmod 700 /root
+
+echo -en 'Server = http://ownmirror.local/$repo/os/$arch\n' > /etc/pacman.d/mirrorlist
+
+sed -i 's/#\(PermitRootLogin \).\+/\1yes/' /etc/ssh/sshd_config
+sed -i 's/#\(Storage=\)auto/\1volatile/' /etc/systemd/journald.conf
+
+sed -i 's/#\(HandleSuspendKey=\)suspend/\1ignore/' /etc/systemd/logind.conf
+sed -i 's/#\(HandleHibernateKey=\)hibernate/\1ignore/' /etc/systemd/logind.conf
+sed -i 's/#\(HandleLidSwitch=\)suspend/\1ignore/' /etc/systemd/logind.conf
+
+systemctl enable pacman-init.service choose-mirror.service systemd-networkd.service systemd-resolved.service sshd.service
+systemctl set-default multi-user.target
+
+# they are broken and nobody needs them
+pacman -Rdd --noconfirm openresolv netctl dhcpcd
+
+# populate trust information
+trust extract-compat
+
+# update package information
+pacman -Syy
+pkgfile --update
+umount /etc/resolv.conf
+ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+
+# add installimage NFS mounts
+echo 'nfsserver.local:/srv/nfs/installimage /root/.installimage nfs ro 0 0' >> /etc/fstab
+echo 'nfsserver.local:/srv/nfs/images /root/images nfs ro 0 0' >> /etc/fstab
+mkdir -p /root/images
+mkdir -p /root/.installimage
