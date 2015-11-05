@@ -1,4 +1,3 @@
 out/*
 airootfs/root/.ssh/authorized_keys
-airootfs/root/customize_airootfs.sh
 config.sh
