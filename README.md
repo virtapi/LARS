@@ -1,6 +1,6 @@
 # LARS - Live Arch Rescue System
 
-LARS is an [arch](https://www.archlinux.org/) based live linux intended to be booted via PXE. The main focus is on running [installimage](https://github.com/virtapi/installimage) to provsion virtual and physical machines.
+LARS is an [Arch Linux](https://www.archlinux.org/) based live system intended to be booted via PXE. The main focus is on running [installimage](https://github.com/virtapi/installimage) to provision virtual and physical machines.
 
 ---
 
@@ -15,7 +15,7 @@ You check out this project on your local computer, modify the config to your nee
 * Copy extract_archiso to your DHCP server
 * Copy config.sh.example to config.sh
 * Copy airootfs/root/customize_airootfs.sh.example to airootfs/root/customize_airootfs.sh
-* Update the variables to your needs (see[configuration](#configuration))
+* Update the variables to your needs (see [configuration](#configuration))
 * run rebuild_and_copy.sh
 
 ---
@@ -30,4 +30,4 @@ Every configuration option for the deployment is listed in `config.sh`:
 Everything that we configure inside of the iso is configured in airootfs/root/customize_airootfs.sh, important points are:
 * we point to an internal mirror
 * add NFS mount points for installimage
-* use systemd-networkd with dhcp instead of dhcpcd
+* use systemd-networkd for dhcp instead of dhcpcd
