@@ -88,6 +88,9 @@ if which ruby >/dev/null && which gem >/dev/null; then
     PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 fi
 
+# modify $PATH to get it working for installimage
+PATH=$PATH:/usr/sbin:/bin:/sbin
+
 # colorized tail
 ctail() {
   tail "$@" | ccze -A -o nolookups
