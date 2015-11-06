@@ -3,3 +3,6 @@ DHCP_SERVER='dhcp01.local'
 DHCP_USER='root'
 DHCP_PATH='/var/www/archrescue/'
 DHCP_EXTRACT='/usr/local/bin/extract_archiso'
+
+ISO_MIRROR='http://internal-mirror.local/$repo/os/$arch'
+ISO_NFSSERVER='10.30.7.40'
