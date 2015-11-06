@@ -7,9 +7,10 @@
 
 config='config.sh'
 
-if [ -x "$config" ]; then
+if [ -n "$config" ] && [ -e "$config" ]; then
   . config.sh
 else
+  echo "Error: ${config} file isn't available"
   exit 1
 fi
 

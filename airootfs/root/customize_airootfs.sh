@@ -7,9 +7,10 @@
 
 # get our config
 config='/root/config.sh'
-if [ -x "$config" ]; then
+if [ -n "$config" ] && [ -e "$config" ]; then
   . /root/config.sh
 else
+  echo "Error: ${config} file isn't available"
   exit 1
 fi
 
@@ -58,6 +59,16 @@ fi
 # update package information
 pacman -Syy
 pkgfile --update
+
+# set rootpassword to our hash or to none
+if [ -z "$ISO_ROOTHASH" ]; then
+	ISO_ROOTHASH='*'
+fi
+grep -v "^root" /etc/shadow > /tmp/shadow.tmp
+GECOS="$(awk -F: '/^root/ {print $3":"$4":"$5":"$6":"$7":"$8":"}' /etc/shadow)"
+echo "root:${ISO_ROOTHASH}:${GECOS}" > /etc/shadow
+cat /tmp/shadow.tmp >> /etc/shadow
+rm /tmp/shadow.tmp
 
 # remove config, could contain sensitive information and we don't want to ship it in the ISO
 rm "$config"
