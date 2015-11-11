@@ -23,6 +23,7 @@ You check out this project on your local computer, modify the config to your nee
 * Copy `extract_archiso.sh` to your DHCP server
 * Copy `config_build.sh.example` to `config_build.sh`
 * Copy `config_live.sh.example` to `config_live.sh`
+* add Arch entry to your pxelinux config, see `ext/pxelinux_config`
 * Update the variables to your needs (see[configuration](#configuration))
 * run `rebuild_and_copy.sh`
 
