@@ -20,7 +20,7 @@ We've got a small diagram showing the different projects in the VirtAPI [namespa
 
 ## How to use
 You check out this project on your local computer, modify the config to your needs and create the ISO. It will than be copied to your DHCP server where the ISO will be extracted.
-* Copy `extract_archiso.sh` to your DHCP server
+* Copy `ext/extract_archiso.sh` to your DHCP server
 * Copy `config_build.sh.example` to `config_build.sh`
 * Copy `config_live.sh.example` to `config_live.sh`
 * add Arch entry to your pxelinux config, see `ext/pxelinux_config`
