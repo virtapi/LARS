@@ -1,0 +1,40 @@
+#!/bin/bash
+
+##
+# created by Tim Meusel
+# with help from Silvio Knizek
+##
+
+# this script will download our installimage config
+
+# get our config
+config='/usr/local/bin/config_live.sh'
+if [ -n "$config" ] && [ -e "$config" ]; then
+  . "${config}"
+else
+  echo "Error: ${config} file isn't available"
+  exit 1
+fi
+
+set -e -u
+
+#mac="$(ifdata -ph eth0 | awk '{gsub(":",""); print tolower($1)}')"
+mac=$(awk 'BEGIN {FS="="; RS=" ";} { if ($1 ~ /BOOTIF/) {gsub(/^[^-]+-/, "", $2); gsub(/-/, "", $2); print toupper($2)}}' /proc/cmdline)
+
+url="${CONFIG_PROTO}://${CONFIG_SERVER}/${CONFIG_PATH}/${mac}/${CONFIG_FILE}.cfg"
+
+wget "${url}" --retry-connrefused -q -O /root/config.cfg
+if [ $? != 0 ]; then
+  url="${CONFIG_PROTO}://${CONFIG_SERVER}/${CONFIG_PATH}/${mac}/${CONFIG_FILE}.json"
+  wget "${url}" --retry-connrefused -q -O /root/config.json
+  if [ $? != 0 ]; then
+    echo "failed to download normal config and json config"
+    exit 1
+  else
+    # here we can do Robin Martinjaks python magic to convert the json into the installimage format
+    true;
+  fi
+fi
+
+# start installimage with our config
+/root/.installimage/installimage.in_screen -c config.cfg -a
