@@ -27,11 +27,7 @@ cp "$config_build" airootfs/root/
 
 # copy the config, needed after booting the ISO
 mkdir -p airootfs/usr/local/bin/
-cp "${config_live}" airootfs/usr/local/bin/
-cp scripts/* airootfs/usr/local/bin/
-if [ $(ls -A ext_scripts/* 2>> /dev/null) ]; then
-  cp ext_scripts/* airootfs/usr/local/bin/
-fi
+rsync -a ext_scripts/ scripts/ "${config_live}" airootfs/usr/local/bin/
 
 # clean builddir, build the ISO, clean it again
 rm -rf work
