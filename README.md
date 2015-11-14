@@ -22,7 +22,7 @@ You check out this project on your local computer, modify the config to your nee
 
 ## Configuration
 Every configuration option for the deployment is listed in our two config files.
-`config_build.sh`
+`config_build.sh` is used during the build process from [rebuild_and_copy](https://github.com/virtapi/LARS/blob/master/rebuild_and_copy.sh) (outside of the ISO) and from [customize_airootfs.sh](https://github.com/virtapi/LARS/blob/master/airootfs/root/customize_airootfs.sh) and deleted afterwards. It won't be included in the ISO (so you could place sensitive information here)!
 * DHCP_SERVER - FQDN/IP of your DHCP/Image Server
 * DHCP_USER - ssh user to copy the images
 * DHCP_PATH - where to place the created ISO
@@ -30,7 +30,7 @@ Every configuration option for the deployment is listed in our two config files.
 * ISO_MIRROR - URL to an arch mirror that will be written to the pacman config
 * ISO_NFSSERVER - NFS server that serves the installimage itself and images
 
-`config_live.sh`
+`config_live.sh` is used from [start_installimage](https://github.com/virtapi/LARS/blob/master/scripts/start_installimage) during the usage of the ISO itself. This config file helps the script to find the correct place for installimage configs. This config file is visible to every customer that uses the rescue system so take about the data you put into it.
 * CONFIG_PROTO - protocol for connection to the installimage server
 * CONFIG_SERVER - IP/FQDN for connection to the installimage server
 * CONFIG_PATH - URL subdir
