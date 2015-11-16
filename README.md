@@ -13,7 +13,7 @@ LARS is an [Arch Linux](https://www.archlinux.org/) based live system intended t
 ## How to use
 You check out this project on your local computer, modify the config to your needs and create the ISO. It will than be copied to your DHCP server where the ISO will be extracted.
 * Copy `extract_archiso.sh` to your DHCP server
-* Copy `config.sh.example` to `config.sh`
+* Copy `config_build.sh.example` to `config_build.sh`
 * Update the variables to your needs (see[configuration](#configuration))
 * run `rebuild_and_copy.sh`
 

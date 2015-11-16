@@ -5,12 +5,12 @@
 # based on a script by Bluewind
 ##
 
-config='config.sh'
+config_build='config_build.sh'
 
-if [ -n "$config" ] && [ -e "$config" ]; then
-  . config.sh
+if [ -n "$config_build" ] && [ -e "$config_build" ]; then
+  . $config_build.sh
 else
-  echo "Error: ${config} file isn't available"
+  echo "Error: ${config_build} file isn't available"
   exit 1
 fi
 
@@ -19,7 +19,8 @@ fi
 set -e
 umask 022
 
-cp config.sh airootfs/root/
+# copy the config because we need it later during build inside of the ISO
+cp "$config_build" airootfs/root/
 
 # clean builddir, build the ISO, clean it again
 rm -rf work
