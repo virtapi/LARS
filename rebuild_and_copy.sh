@@ -20,14 +20,18 @@ set -e
 umask 022
 
 cp config.sh airootfs/root/
+
+# clean builddir, build the ISO, clean it again
 rm -rf work
 ./build.sh -v
 rm -rf work
 
+# determine the name of the latest ISO
 unset -v latest
 for file in out/archlinux-*.iso; do
 	[[ $file -nt $latest ]] && latest=$file
 done
 
+# copy and extract the ISO
 rsync -tP "$latest" -e ssh "${DHCP_USER}@${DHCP_SERVER}:${DHCP_PATH}"
 ssh "${DHCP_USER}@${DHCP_SERVER}" "${DHCP_EXTRACT} ${DHCP_PATH}${latest##*/}"
