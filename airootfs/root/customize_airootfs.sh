@@ -8,16 +8,15 @@
 # get our config
 config='/root/config.sh'
 if [ -n "$config" ] && [ -e "$config" ]; then
-  . /root/config.sh
+  # source and remove config, could contain sensitive information and we don't want to ship it in the ISO
+  . "${config}"
+  rm "${config}"
 else
   echo "Error: ${config} file isn't available"
   exit 1
 fi
 
 set -e -u
-
-# get our config
-. /root/config.sh
 
 # english language and german keyboard layout
 sed -i 's/#\(en_US\.UTF-8\)/\1/' /etc/locale.gen
@@ -69,9 +68,6 @@ GECOS="$(awk -F: '/^root/ {print $3":"$4":"$5":"$6":"$7":"$8":"}' /etc/shadow)"
 echo "root:${ISO_ROOTHASH}:${GECOS}" > /etc/shadow
 cat /tmp/shadow.tmp >> /etc/shadow
 rm /tmp/shadow.tmp
-
-# remove config, could contain sensitive information and we don't want to ship it in the ISO
-rm "$config"
 
 # use the resolv.conf from systemd-resolved.service
 umount /etc/resolv.conf
