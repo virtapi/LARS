@@ -22,6 +22,9 @@ umask 022
 # copy the config because we need it later during build inside of the ISO
 cp "$config_build" airootfs/root/
 
+mkdir -p airootfs/usr/local/bin/
+rsync -a ext_scripts/ scripts/ airootfs/usr/local/bin/
+
 # clean builddir, build the ISO, clean it again
 rm -rf work
 ./build.sh -v
