@@ -20,7 +20,7 @@ You check out this project on your local computer, modify the config to your nee
 ---
 
 ## Configuration
-Every configuration option for the deployment is listed in `config.sh`:
+Every configuration option for the deployment is listed in `config_build.sh` which is used during the build process from [rebuild_and_copy](https://github.com/virtapi/LARS/blob/master/rebuild_and_copy.sh) (outside of the ISO) and from [customize_airootfs.sh](https://github.com/virtapi/LARS/blob/master/airootfs/root/customize_airootfs.sh) (inside the ISO chroot). It will be  temporarily copied into the build directory and deleted afterwards. The copy won't be included in the ISO (so you could place sensitive information here)!
 * DHCP_SERVER - FQDN/IP of your DHCP/Image Server
 * DHCP_USER - ssh user to copy the images
 * DHCP_PATH - where to place the created ISO
