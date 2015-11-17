@@ -1,0 +1,11 @@
+#!/bin/bash
+
+##
+# created by Tim Meusel
+##
+
+# these variables will be used from the installimage
+CONFIG_PROTO='http'
+CONFIG_SERVER='10.30.7.40'
+CONFIG_PATH='installimage_configs'
+CONFIG_FILE='config.cfg'
