@@ -1,0 +1,11 @@
+# this is an example for a PXE entry in pxelinux
+# this will boot our extracted arch ISO
+# you can extract it with our extract_archiso.sh
+# extraction happens automatically after building the ISO, see rebuild_and_copy.sh
+LABEL archrescue
+  MENU LABEL Arch Linux Live Rescue
+  KERNEL http://10.30.7.40/archrescue/arch/boot/x86_64/vmlinuz
+  INITRD http://10.30.7.40/archrescue/arch/boot/x86_64/intel_ucode.img
+  INITRD http://10.30.7.40/archrescue/arch/boot/x86_64/archiso.img
+  APPEND archiso_http_srv=http://10.30.7.40/archrescue/ archisobasedir=arch checksum=y nomodeset quiet systemd.mask=systemd-machine-id-commit systemd.mask=systemd-tmpfiles-setup systemd.mask=ldconfig
+  SYSAPPEND 3
