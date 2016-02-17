@@ -9,6 +9,9 @@ LARS is an [Arch Linux](https://www.archlinux.org/) based live system intended t
 + [How to use](#how-to-use)
 + [Configuration](#configuration)
 + [Using the installimage](#using-the-installimage)
++ [Issues](#issues)
++ [Copyright](#copyright)
++ [Contributor Code of Conduct](#contributor-code-of-conduct)
 
 ---
 
@@ -55,3 +58,18 @@ Everything that we configure inside of the iso is configured in airootfs/root/cu
 
 ## Using the installimage
 You can start the installimage with the [start_installimage](https://github.com/virtapi/LARS/blob/master/scripts/start_installimage) script. This will source the `config_live.sh` file and try to download a normal installimage autoconfig file, if this fails it tries to download a json hash which will be converted into the needed format. After that, the installimage starts in a screen session and reboots if everything worked well. You can do a fully automated installatio if you attach `script=/usr/local/bin/start_installimage` to the PXE kernel cmdline.
+
+---
+
+## Issues
+[Github Issues](https://www.github.com/virtapi/LARS/issues)
+
+---
+
+## Copyright
+This Scriptcollection is based on the `archiso` [Package](https://www.archlinux.org/packages/extra/any/archiso/). It is licensed under GPL, all of our changes are based on the AGPL, you can find the license [here](LICENSE).
+
+---
+
+## Contributor Code of Conduct
+We support the Contributor Covenant, you can find it [here](code_of_conduct.md).
