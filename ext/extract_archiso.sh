@@ -17,7 +17,6 @@ if [ -z "${1}" ]; then
 fi
 
 iso="$(readlink -f "$1")"
-http_base="http://10.30.7.40/archrescue"
 
 cd /var/www/archrescue/
 

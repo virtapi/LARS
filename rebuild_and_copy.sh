@@ -15,6 +15,7 @@ for file in "$config_build" "$config_live"; do
   fi
 done
 
+# shellcheck disable=SC1090
 . "$config_build"
 
 # we need to place the set under the exit
@@ -26,7 +27,6 @@ umask 022
 cp "$config_build" airootfs/root/
 
 # copy the config, needed after booting the ISO
-mkdir -p airootfs/usr/local/bin/
 rsync -a ext_scripts/ scripts/ "${config_live}" airootfs/usr/local/bin/
 
 # clean builddir, build the ISO, clean it again
@@ -42,4 +42,5 @@ done
 
 # copy and extract the ISO
 rsync -tP "$latest" -e ssh "${DHCP_USER}@${DHCP_SERVER}:${DHCP_PATH}"
+# shellcheck disable=SC2029
 ssh "${DHCP_USER}@${DHCP_SERVER}" "${DHCP_EXTRACT} ${DHCP_PATH}${latest##*/}"
