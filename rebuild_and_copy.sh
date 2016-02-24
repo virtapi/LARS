@@ -42,4 +42,5 @@ done
 
 # copy and extract the ISO
 rsync -tP "$latest" -e ssh "${DHCP_USER}@${DHCP_SERVER}:${DHCP_PATH}"
+# shellcheck disable=SC2029
 ssh "${DHCP_USER}@${DHCP_SERVER}" "${DHCP_EXTRACT} ${DHCP_PATH}${latest##*/}"
