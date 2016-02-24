@@ -10,6 +10,7 @@
 # get our config
 config='/usr/local/bin/config_live.sh'
 if [ -n "$config" ] && [ -e "$config" ]; then
+  # shellcheck disable=SC1090
   . "${config}"
 else
   echo "Error: ${config} file isn't available"
