@@ -15,6 +15,7 @@ for file in "$config_build" "$config_live"; do
   fi
 done
 
+# shellcheck disable=SC1090
 . "$config_build"
 
 # we need to place the set under the exit
