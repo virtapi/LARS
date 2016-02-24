@@ -11,6 +11,8 @@ export DHCP_PATH='/var/www/archrescue/'
 export DHCP_EXTRACT='/usr/local/bin/extract_archiso'
 
 # variables used inside of the ISO during the build
+# disable checking for vars in single quotes, this isn't a var
+# shellcheck disable=SC2016
 export ISO_MIRROR='http://internal-mirror.local/$repo/os/$arch'
 export ISO_NFSSERVER='10.30.7.40'
 export ISO_ROOTHASH='*'
