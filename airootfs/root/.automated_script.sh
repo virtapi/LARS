@@ -30,5 +30,14 @@ automated_script ()
 }
 
 if [[ $(tty) == "/dev/tty1" ]]; then
-    automated_script
+  cmdline="$(cat /proc/cmdline)"
+  for i in $cmdline; do case "$i" in HASH=*) export "$i";; esac; done
+  if [ -n "$HASH" ]; then
+    grep -v "^root" /etc/shadow > /tmp/shadow.tmp
+    GECOS="$(awk -F: '/^root/ {print $3":"$4":"$5":"$6":"$7":"$8":"}' /etc/shadow)"
+    echo "root:${HASH}:${GECOS}" > /etc/shadow
+    cat /tmp/shadow.tmp >> /etc/shadow
+    rm /tmp/shadow.tmp
+  fi
+  automated_script
 fi
