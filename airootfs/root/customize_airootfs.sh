@@ -25,7 +25,7 @@ locale-gen
 
 ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
-usermod -s /usr/bin/bash root
+usermod -s /bin/bash root
 chmod 700 /root
 
 if [ -n "$ISO_MIRROR" ]; then
