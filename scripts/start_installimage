@@ -30,7 +30,9 @@ else
   exit 1
 fi
 
-wget "${url}" --retry-connrefused -q -O /root/config.cfg
+# we need to allow variable expansion if someone tries to attach any params to the URL
+# shellcheck disable=SC2086
+curl --silent $url > /root/config.cfg
 if [ $? != 0 ]; then
   echo "failed to download config"
   exit 1
