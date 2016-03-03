@@ -21,7 +21,7 @@ set -e -u
 
 # currently we need the mac from the interface we used for booting, not the first one
 #mac="$(ifdata -ph eth0 | awk '{gsub(":",""); print tolower($1)}')"
-mac=$(awk 'BEGIN {FS="="; RS=" ";} { if ($1 ~ /BOOTIF/) {gsub(/^[^-]+-/, "", $2); gsub(/-/, ":", $2); print toupper($2)}}' /proc/cmdline)
+mac=$(awk 'BEGIN {FS="="; RS=" ";} { if ($1 ~ /BOOTIF/) {gsub(/^[^-]+-/, "", $2); gsub(/-/, ":", $2); print tolower($2)}}' /proc/cmdline)
 
 url="${CONFIG_PROTO}://${CONFIG_SERVER}/${CONFIG_PATH}/${mac}/${CONFIG_FILE}"
 
