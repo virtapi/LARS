@@ -45,6 +45,7 @@ Every configuration option for the deployment is listed in our two config files.
 
 `config_live.sh` is used from [start_installimage](https://github.com/virtapi/LARS/blob/master/scripts/start_installimage) during the usage of the ISO itself. This config file helps the script to find the correct place for installimage configs. This config file is visible to every customer that uses the rescue system so take care about the data you put into it.
 * CONFIG_PROTO - protocol for connection to the installimage server
+* CONFIG_PORT - the destination port of the used web/ftp server
 * CONFIG_SERVER - IP/FQDN for connection to the installimage server
 * CONFIG_PATH - URL subdir
 * CONFIG_FILE - the file itself
