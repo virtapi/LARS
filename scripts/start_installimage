@@ -23,7 +23,7 @@ set -e -u
 #mac="$(ifdata -ph eth0 | awk '{gsub(":",""); print tolower($1)}')"
 mac=$(awk 'BEGIN {FS="="; RS=" ";} { if ($1 ~ /BOOTIF/) {gsub(/^[^-]+-/, "", $2); gsub(/-/, "", $2); print toupper($2)}}' /proc/cmdline)
 
-url="${CONFIG_PROTO}://${CONFIG_SERVER}/${CONFIG_PATH}/${mac}/${CONFIG_FILE}.cfg"
+url="${CONFIG_PROTO}://${CONFIG_SERVER}/${CONFIG_PATH}/${mac}/${CONFIG_FILE}"
 
 wget "${url}" --retry-connrefused -q -O /root/config.cfg
 if [ $? != 0 ]; then
