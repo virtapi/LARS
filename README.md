@@ -11,7 +11,8 @@ LARS is an [Arch Linux](https://www.archlinux.org/) based live system intended t
 + [Using the installimage](#using-the-installimage)
 + [Issues](#issues)
 + [Copyright](#copyright)
-+ [Contributor Code of Conduct](#contributor-code-of-conduct)
++ [Contact](#contact)
++ [Contribution](#contribution)
 
 ---
 
@@ -72,5 +73,10 @@ This Scriptcollection is based on the `archiso` [Package](https://www.archlinux.
 
 ---
 
-## Contributor Code of Conduct
-We support the Contributor Covenant, you can find it [here](code_of_conduct.md).
+## Contact
+You can meet us in #virtapi at freenode.
+
+---
+
+## Contribution
+We've defined our contribution rules in [CONTRIBUTING.md](CONTRIBUTING.md).
