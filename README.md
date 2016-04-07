@@ -10,7 +10,7 @@ LARS is an [Arch Linux](https://www.archlinux.org/) based live system intended t
 + [Configuration](#configuration)
 + [Using the installimage](#using-the-installimage)
 + [Issues](#issues)
-+ [Copyright](#copyright)
++ [License](#license)
 + [Contact](#contact)
 + [Contribution](#contribution)
 
@@ -68,7 +68,7 @@ You can start the installimage with the [start_installimage](https://github.com/
 
 ---
 
-## Copyright
+## License
 This Scriptcollection is based on the `archiso` [Package](https://www.archlinux.org/packages/extra/any/archiso/). It is licensed under GPL, all of our changes are based on the AGPL, you can find the license [here](LICENSE).
 
 ---
