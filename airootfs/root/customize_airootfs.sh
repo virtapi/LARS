@@ -71,7 +71,6 @@ cat /tmp/shadow.tmp >> /etc/shadow
 rm /tmp/shadow.tmp
 
 # use the resolv.conf from systemd-resolved.service
-umount /etc/resolv.conf
 ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
 # check if we want NTP
