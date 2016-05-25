@@ -1,0 +1,34 @@
+  nethack               on              # default: off
+  autodetach            on              # default: on
+  crlf                  off             # default: off
+  deflogin              off             # default: on
+  hardcopy_append       on              # default: off
+  startup_message       off             # default: on
+  vbell                 off             # default: ???
+  altscreen             on              # default: off
+  defbce                on              # default: off
+  defnonblock           on              # default: off
+  defscrollback         1000            # default: 100
+  silencewait           15              # default: 30
+  shell                 -$SHELL
+  caption always "%{WB}%?%-Lw%?%{kw}%n*%f %t%?(%u)%?%{WB}%?%+Lw%?%{Wb}"
+  hardstatus alwayslastline "%{= RY}%H %{BW} %l %{bW} %c %M %d%="
+  sorendition    wb # yellow on blue
+  activity              "%C -> %n%f %t activity!"
+  bell                  "%C -> %n%f %t bell!~"
+  pow_detach_msg        "BYE"
+  vbell_msg             " *beep* "
+  bind .
+  bind ^\
+  bind \\
+  bind P paste .
+  bind R screen -t root     0 su -
+  bind V screen -t vim      1 vim -X
+  bind Y stuff http://www.cynapses.org/
+  bindkey "^[[5;2~" eval "copy" "stuff ^u"
+  bindkey -m "^[[5;2~" stuff ^u
+  bindkey -m "^[[6;2~" stuff ^d
+  msgwait 1
+  version
+  msgwait 2
+
