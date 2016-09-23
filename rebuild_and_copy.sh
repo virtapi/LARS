@@ -5,8 +5,10 @@
 # based on a script by Bluewind
 ##
 
-config_build='config_build.sh'
-config_live='config_live.sh'
+# this allows us to set different configs via env vars:
+# CONFIG_BUILD=config_build_rackmonkey.sh CONFIG_LIVE=config_live_rackmonkey.sh ./rebuild_and_copy.sh
+config_build=${CONFIG_BUILD:-config_build.sh}
+config_live=${CONFIG_LIVE:-config_live.sh}
 
 for file in "$config_build" "$config_live"; do
   if [ ! -e "$file" ]; then
@@ -24,7 +26,7 @@ set -e
 umask 022
 
 # copy the config because we need it later during build inside of the ISO
-cp "$config_build" airootfs/root/
+cp "$config_build" airootfs/root/config_build.sh
 
 # copy the config, needed after booting the ISO
 rsync -a ext_scripts/ scripts/ "${config_live}" airootfs/usr/local/bin/
