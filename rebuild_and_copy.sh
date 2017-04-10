@@ -29,7 +29,8 @@ umask 022
 cp "$config_build" airootfs/root/config_build.sh
 
 # copy the config, needed after booting the ISO
-rsync -a ext_scripts/ scripts/ "${config_live}" airootfs/usr/local/bin/
+rsync -a ext_scripts/ scripts/ airootfs/usr/local/bin/
+rsync -a "${config_live}" airootfs/usr/local/bin/config_live.sh
 
 # clean builddir, build the ISO, clean it again
 rm -rf work
