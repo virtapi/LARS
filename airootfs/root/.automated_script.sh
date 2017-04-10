@@ -31,6 +31,7 @@ automated_script ()
 
 if [[ $(tty) == "/dev/tty1" ]]; then
   cmdline="$(cat /proc/cmdline)"
+  # shellcheck disable=SC2163
   for i in $cmdline; do case "$i" in HASH=*) export "$i";; esac; done
   if [ -n "$HASH" ]; then
     grep -v "^root" /etc/shadow > /tmp/shadow.tmp
