@@ -55,6 +55,13 @@ if [ -n "$ISO_NFSSERVER" ]; then
   mkdir -p /root/{images,.installimage}
 fi
 
+# add our aur repo
+echo '
+[aur]
+SigLevel = Optional TrustAll
+Include = /etc/pacman.d/mirrorlist
+' >> /etc/pacman.conf
+
 # update package information
 pacman -Syy
 pkgfile --update
