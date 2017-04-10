@@ -59,3 +59,9 @@ screen
 sysstat
 ipmitool
 intel-ucode
+python-requests
+python-pyudev
+python-six
+python-lxml
+lshw
+dmidecode
