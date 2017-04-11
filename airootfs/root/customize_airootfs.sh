@@ -40,7 +40,7 @@ sed -i 's/#\(HandleSuspendKey=\)suspend/\1ignore/' /etc/systemd/logind.conf
 sed -i 's/#\(HandleHibernateKey=\)hibernate/\1ignore/' /etc/systemd/logind.conf
 sed -i 's/#\(HandleLidSwitch=\)suspend/\1ignore/' /etc/systemd/logind.conf
 
-systemctl enable pacman-init.service choose-mirror.service systemd-networkd.service systemd-resolved.service sshd.service
+systemctl enable pacman-init.service choose-mirror.service systemd-networkd.service systemd-resolved.service systemd-timesyncd.service sshd.service
 systemctl set-default multi-user.target
 
 # they are broken and nobody needs them
@@ -78,5 +78,17 @@ cat /tmp/shadow.tmp >> /etc/shadow
 rm /tmp/shadow.tmp
 
 # use the resolv.conf from systemd-resolved.service
-umount /etc/resolv.conf
 ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+
+# check if we want NTP
+if [ "$ISO_NTP" = "true" ]; then
+  if [ -n "$ISO_NTPSERVER" ]; then
+    mkdir /etc/systemd/timesyncd.conf.d/
+    echo -e "[Time]\nNTP=\nNTP=$ISO_NTPSERVER" > /etc/systemd/timesyncd.conf.d/ntp.conf
+  fi
+  # this may break because we are in a chroot
+  timedatectl set-ntp on
+
+  # set hardwareclock to UTC
+  timedatectl set-local-rtc 0
+fi
