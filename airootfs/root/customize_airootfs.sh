@@ -9,6 +9,7 @@
 config='/root/config_build.sh'
 if [ -n "$config" ] && [ -e "$config" ]; then
   # source and remove config, could contain sensitive information and we don't want to ship it in the ISO
+  # shellcheck disable=SC1090
   . "${config}"
   rm "${config}"
 else
@@ -54,6 +55,13 @@ if [ -n "$ISO_NFSSERVER" ]; then
   echo "${ISO_NFSSERVER}:/srv/nfs/images /root/images nfs ro 0 0" >> /etc/fstab
   mkdir -p /root/{images,.installimage}
 fi
+
+# add our aur repo
+echo '
+[aur]
+SigLevel = Optional TrustAll
+Include = /etc/pacman.d/mirrorlist
+' >> /etc/pacman.conf
 
 # update package information
 pacman -Syy

@@ -74,7 +74,7 @@ This Scriptcollection is based on the `archiso` [Package](https://www.archlinux.
 ---
 
 ## Contact
-You can meet us in #virtapi at freenode.
+You can meet us in the IRC channel #virtapi at freenode.
 
 ---
 
