@@ -3,3 +3,5 @@ Name=e*
 
 [Network]
 DHCP=ipv4
+IPv6AcceptRA=false
+LLDP=true
