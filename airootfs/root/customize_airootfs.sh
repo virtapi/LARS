@@ -78,5 +78,34 @@ cat /tmp/shadow.tmp >> /etc/shadow
 rm /tmp/shadow.tmp
 
 # use the resolv.conf from systemd-resolved.service
-umount /etc/resolv.conf
-ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+if [ -L /etc/resolv.conf ]; then
+  umount /etc/resolv.conf
+fi
+
+# setup sysctl foo to prevent RA
+# this results in 4?! gateways configured
+mkdir -p /etc/sysctl.d/
+echo '
+net.ipv4.icmp_echo_ignore_broadcasts=1
+# ipv6 settings (no autoconfiguration)
+net.ipv6.conf.default.autoconf=0
+net.ipv6.conf.default.accept_dad=0
+net.ipv6.conf.default.accept_ra=0
+net.ipv6.conf.default.accept_ra_defrtr=0
+net.ipv6.conf.default.accept_ra_rtr_pref=0
+net.ipv6.conf.default.accept_ra_pinfo=0
+net.ipv6.conf.default.accept_source_route=0
+net.ipv6.conf.default.accept_redirects=0
+net.ipv6.conf.default.forwarding=0
+net.ipv6.conf.all.autoconf=0
+net.ipv6.conf.all.accept_dad=0
+net.ipv6.conf.all.accept_ra=0
+net.ipv6.conf.all.accept_ra_defrtr=0
+net.ipv6.conf.all.accept_ra_rtr_pref=0
+net.ipv6.conf.all.accept_ra_pinfo=0
+net.ipv6.conf.all.accept_source_route=0
+net.ipv6.conf.all.accept_redirects=0
+net.ipv6.conf.all.forwarding=0
+' >> /etc/sysctl.d/99-ipv6.conf
+
+touch /etc/sysctl.conf
