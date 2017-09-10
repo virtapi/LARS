@@ -51,7 +51,8 @@ setup_ipv6 ()
     ip -6 route add default via "$IP6GW" dev "$interface"
   fi
 }
-
+systemctl start systemd-resolved
+ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 if [[ $(tty) == "/dev/tty1" ]]; then
   cmdline="$(cat /proc/cmdline)"
   # shellcheck disable=SC2163
