@@ -41,10 +41,13 @@ get_interface_we_booted_from ()
 
 setup_ipv6 ()
 {
-  if [ -n "$IP6ADDR" ] && [ -n "$IP6GW" ]; then
+  if [ -n "$IP6ADDR" ] && [ -n "$IP6GW" ] && [ -n "$IP6PRE" ]; then
+    local mac=""
+    local interface=""
     mac="$(get_mac)"
     interface="$(get_interface_we_booted_from "$mac")"
-    ip -6 addr add "$IP6ADDR" dev "$interface"
+    ip -6 addr add "${IP6ADDR}/${IP6PRE}" dev "$interface"
+    ip -6 route delete default
     ip -6 route add default via "$IP6GW" dev "$interface"
   fi
 }
@@ -57,8 +60,11 @@ if [[ $(tty) == "/dev/tty1" ]]; then
       HASH=*) export "$i";;
       IP6ADDR=*) export "$i";;
       IP6GW=*) export "$i";;
+      IP6PRE=*) export "$i";;
     esac;
   done
+
+  setup_ipv6
 
   if [ -n "$HASH" ]; then
     grep -v "^root" /etc/shadow > /tmp/shadow.tmp
