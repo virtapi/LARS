@@ -65,3 +65,4 @@ python-six
 python-lxml
 lshw
 dmidecode
+busybox
