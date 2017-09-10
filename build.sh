@@ -269,8 +269,8 @@ done
 run_once make_boot_extra
 run_once make_syslinux
 run_once make_isolinux
-run_once make_efi
-run_once make_efiboot
+#run_once make_efi
+#run_once make_efiboot
 
 for arch in x86_64; do
     run_once make_prepare
