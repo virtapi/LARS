@@ -21,10 +21,10 @@ set -e -u
 
 # currently we need the mac from the interface we used for booting, not the first one
 #mac="$(ifdata -ph eth0 | awk '{gsub(":",""); print tolower($1)}')"
-mac=$(awk 'BEGIN {FS="="; RS=" ";} { if ($1 ~ /BOOTIF/) {gsub(/^[^-]+-/, "", $2); gsub(/-/, ":", $2); print tolower($2)}}' /proc/cmdline)
+mac=$(awk 'BEGIN {FS="="; RS=" ";} { if ($1 ~ /BOOTIF/) {gsub(/^[^-]+-/, "", $2); gsub(/-/, "_", $2); print tolower($2)}}' /proc/cmdline)
 
 if [ -n "$CONFIG_PROTO" ] && [ -n "$CONFIG_PORT" ] && [ -n "$CONFIG_SERVER" ] && [ -n "$CONFIG_PATH" ] && [ -n "$mac" ] && [ -n "$CONFIG_FILE" ]; then
-  url="${CONFIG_PROTO}://${CONFIG_SERVER}:${CONFIG_PORT}/${CONFIG_PATH}/${mac}/${CONFIG_FILE}"
+  url="${CONFIG_PROTO}://${CONFIG_SERVER}:${CONFIG_PORT}/${CONFIG_PATH}/${mac}"
 else
   echo "One of the needed config options is missing"
   exit 1
