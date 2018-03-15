@@ -68,6 +68,7 @@ sudo
 sysstat
 tcpdump
 testdisk
+tmux
 usb_modeswitch
 vim-minimal
 wget
