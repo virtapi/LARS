@@ -18,7 +18,7 @@ LARS is an [Arch Linux](https://www.archlinux.org/) based live system intended t
 
 ## Project Overview
 We've got a small diagram showing the different projects in the VirtAPI [namespace](https://github.com/virtapi/repositories):
-![virtapi-overview](https://rawgit.com/virtapi/LARS/master/virtapi-overview.svg)
+![virtapi-overview](https://combinatronics.com/virtapi/LARS/master/virtapi-overview.svg)
 
 ---
 
